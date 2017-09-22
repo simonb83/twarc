@@ -17,6 +17,7 @@ from __future__ import print_function
 
 import json
 import urllib
+from urllib.parse import urlencode
 import logging
 import fileinput
 import multiprocessing
@@ -47,7 +48,7 @@ def rewrite_line(line):
 
         if url:
             url = url.encode('utf8')
-            u = '{}/?{}'.format(unshrtn_url, urllib.urlencode({'url': url}))
+            u = '{}/?{}'.format(unshrtn_url, urlencode({'url': url}))
 
             resp = None
             for retry in range(1, retries+1):
