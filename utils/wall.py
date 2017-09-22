@@ -142,7 +142,7 @@ for line in lines:
         "name": tweet["user"]["name"],
         "username": tweet["user"]["screen_name"],
         "user_url": "http://twitter.com/" + tweet["user"]["screen_name"],
-        "text": tweet["text"],
+        "text": tweet["full_text"],
         "avatar": AVATAR_DIR + "/" + filename,
         "url": "http://twitter.com/" + tweet["user"]["screen_name"] + "/status/" + tweet["id_str"],
     }
@@ -160,7 +160,7 @@ for line in lines:
     for url in tweet['entities']['urls']:
         a = '<a href="%(expanded_url)s">%(url)s</a>' % url
         start, end = url['indices']
-        t['text'] = t['text'][0:start] + a + tweet['text'][end:]
+        t['text'] = t['text'][0:start] + a + tweet['full_text'][end:]
 
     t['text'] = re.sub(' @([^ ]+)', ' <a href="http://twitter.com/\g<1>">@\g<1></a>', t['text'])
     t['text'] = re.sub(' #([^ ]+)', ' <a href="https://twitter.com/search?q=%23\g<1>&src=hash">#\g<1></a>', t['text'])
