@@ -21,7 +21,7 @@ for line in fileinput.input():
         tweet = json.loads(line)
     except:
         pass
-    for word in tweet['text'].split(' '):
+    for word in tweet['full_text'].split(' '):
         word = word.lower()
         word = word.replace(".", "")
         if len(word) < 3: continue
