@@ -15,8 +15,11 @@ import fileinput
 
 seen = {}
 for line in fileinput.input():
-    tweet = json.loads(line)
-    id = tweet["id"]
-    if id not in seen:
-        seen[id] = True
-        print(json.dumps(tweet))
+    try:
+        tweet = json.loads(line)
+        id = tweet["id"]
+        if id not in seen:
+            seen[id] = True
+            print(json.dumps(tweet))
+    except:
+        pass
