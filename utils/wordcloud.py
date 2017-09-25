@@ -48,53 +48,53 @@ for word in top_words:
         "size": size
     })
 
-wordcloud_js = urlopen('https://raw.githubusercontent.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js').read()
+# wordcloud_js = urlopen('https://raw.githubusercontent.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js').read()
 
-output = """<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>twarc wordcloud</title>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-</head>
-<body>
-<script>
+# output = """<!DOCTYPE html>
+# <html>
+# <head>
+# <meta charset="utf-8">
+# <title>twarc wordcloud</title>
+# <script src="http://d3js.org/d3.v3.min.js"></script>
+# </head>
+# <body>
+# <script>
 
-  // embed Jason Davies' d3-cloud since it's not available in a CDN
-  %s
+#   // embed Jason Davies' d3-cloud since it's not available in a CDN
+#   %s
 
-  var fill = d3.scale.category20();
-  var words = %s
+#   var fill = d3.scale.category20();
+#   var words = %s
 
-  d3.layout.cloud().size([800, 800])
-      .words(words)
-      .rotate(function() { return ~~(Math.random() * 2) * 90; })
-      .font("Impact")
-      .fontSize(function(d) { return d.size; })
-      .on("end", draw)
-      .start();
+#   d3.layout.cloud().size([800, 800])
+#       .words(words)
+#       .rotate(function() { return ~~(Math.random() * 2) * 90; })
+#       .font("Impact")
+#       .fontSize(function(d) { return d.size; })
+#       .on("end", draw)
+#       .start();
 
-  function draw(words) {
-    d3.select("body").append("svg")
-        .attr("width", 1000)
-        .attr("height", 1000)
-      .append("g")
-        .attr("transform", "translate(400,400)")
-      .selectAll("text")
-        .data(words)
-      .enter().append("text")
-        .style("font-size", function(d) { return d.size + "px"; })
-        .style("font-family", "Impact")
-        .style("fill", function(d, i) { return fill(i); })
-        .attr("text-anchor", "middle")
-        .attr("transform", function(d) {
-          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-        })
-        .text(function(d) { return d.text; });
-  }
-</script>
-</body>
-</html>
-""" % (wordcloud_js.decode('utf8'), json.dumps(words, indent=2))
+#   function draw(words) {
+#     d3.select("body").append("svg")
+#         .attr("width", 1000)
+#         .attr("height", 1000)
+#       .append("g")
+#         .attr("transform", "translate(400,400)")
+#       .selectAll("text")
+#         .data(words)
+#       .enter().append("text")
+#         .style("font-size", function(d) { return d.size + "px"; })
+#         .style("font-family", "Impact")
+#         .style("fill", function(d, i) { return fill(i); })
+#         .attr("text-anchor", "middle")
+#         .attr("transform", function(d) {
+#           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+#         })
+#         .text(function(d) { return d.text; });
+#   }
+# </script>
+# </body>
+# </html>
+# """ % (wordcloud_js.decode('utf8'), json.dumps(words, indent=2))
 
-sys.stdout.write(output)
+sys.stdout.write(json.dumps(words))

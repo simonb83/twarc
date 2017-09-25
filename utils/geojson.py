@@ -69,7 +69,7 @@ for line in fileinput.input(files=args.files):
             "name": tweet["user"]["name"],
             "screen_name": tweet["user"]["screen_name"],
             "created_at": t.isoformat("T") + "Z",
-            "text": tweet["text"],
+            "text": tweet["full_text"],
             "profile_image_url": tweet["user"]["profile_image_url"],
             "url": "http://twitter.com/%s/status/%s" % (
                 tweet["user"]["screen_name"],
